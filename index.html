@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✏️ MODIFICA QUI: titolo e descrizione che appaiono su Google e nella scheda del browser -->
+  <title>Luca Blunda – AI researcher</title>
+  <meta name="description" content="Sito personale di Mario Rossi: progetti, competenze e contatti.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========== COLORI (cambia qui per personalizzare la palette) ========== */
+    :root {
+      color-scheme: light dark;
+      --bg: #EEF1F4;
+      --surface: #FFFFFF;
+      --ink: #141C2B;
+      --muted: #5B6575;
+      --line: #D5DBE3;
+      --accent: #1F6F6A;
+      --accent-ink: #FFFFFF;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111720;
+        --surface: #18202B;
+        --ink: #E7EBF1;
+        --muted: #9AA5B5;
+        --line: #2A3441;
+        --accent: #56B9B1;
+        --accent-ink: #0E1A19;
+      }
+    }
+
+    /* ========== BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Bricolage Grotesque", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+    .wrap { width: min(100% - 2.5rem, 62rem); margin-inline: auto; }
+
+    h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; margin: 0; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1.5rem; }
+    h3 { font-size: 1.2rem; font-weight: 600; }
+    p { margin: 0 0 1rem; max-width: 65ch; }
+
+    /* ========== NAVIGAZIONE ========== */
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.9rem; }
+    .nav .brand { font-weight: 700; color: var(--ink); text-decoration: none; }
+    .nav ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+    .nav ul a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+    .nav ul a:hover { color: var(--ink); }
+
+    /* ========== INTESTAZIONE (hero) ========== */
+    .hero { padding-block: clamp(3.5rem, 10vw, 7rem) clamp(3rem, 8vw, 5rem); }
+    .hero .kicker { color: var(--muted); margin-bottom: 1rem; font-size: 1.05rem; }
+    .hero h1 {
+      font-size: clamp(2.75rem, 8vw, 5.5rem);
+      font-weight: 700;
+      font-variation-settings: "opsz" 96;
+      max-width: 14ch;
+      margin-bottom: 1.5rem;
+    }
+    .hero .lead { font-size: 1.2rem; max-width: 50ch; margin-bottom: 2rem; }
+    .links { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
+    .links a {
+      display: inline-block;
+      padding: 0.55rem 1rem;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .links a:hover { border-color: var(--accent); color: var(--accent); }
+    .links a.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .links a.primary:hover { filter: brightness(1.08); }
+
+    /* ========== SEZIONI ========== */
+    section { padding-block: 3.5rem; border-top: 1px solid var(--line); }
+
+    /* Progetti */
+    .projects { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+    .project {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .project h3 a { color: inherit; text-decoration: none; }
+    .project h3 a:hover { color: var(--accent); }
+    .project p { margin: 0; color: var(--muted); font-size: 1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding: 0; list-style: none; }
+    .tags li { font-size: 0.85rem; padding: 0.2rem 0.6rem; border-radius: 6px; background: var(--bg); color: var(--muted); }
+
+    /* Competenze */
+    .skills { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+    .skills h3 { font-size: 1rem; color: var(--muted); font-weight: 500; margin-bottom: 0.5rem; }
+    .skills ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skills li { padding: 0.35rem 0.75rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 0.95rem; }
+
+    /* Esperienza (cronologia) */
+    .timeline { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.75rem; }
+    .timeline li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; }
+    .timeline time { color: var(--muted); font-size: 0.95rem; padding-top: 0.2rem; }
+    .timeline .org { color: var(--muted); }
+    .timeline p { margin-top: 0.4rem; margin-bottom: 0; font-size: 1rem; }
+    @media (max-width: 36rem) { .timeline li { grid-template-columns: 1fr; gap: 0.25rem; } }
+
+    /* Contatti e piè di pagina */
+    .contact .lead { font-size: 1.15rem; }
+    footer { border-top: 1px solid var(--line); padding-block: 2rem; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGAZIONE ========== -->
+  <nav class="nav" aria-label="Principale">
+    <div class="wrap">
+      <!-- ✏️ MODIFICA QUI: il tuo nome -->
+      <a class="brand" href="#">Mario Rossi</a>
+      <ul>
+        <li><a href="#progetti">Progetti</a></li>
+        <li><a href="#competenze">Competenze</a></li>
+        <li><a href="#esperienza">Esperienza</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== INTESTAZIONE ========== -->
+  <header class="hero">
+    <div class="wrap">
+      <!-- ✏️ MODIFICA QUI: ruolo e città -->
+      <p class="kicker">Sviluppatore web · Milano</p>
+
+      <!-- ✏️ MODIFICA QUI: il tuo nome o una frase che ti presenta -->
+      <h1>Hi, I'm Luca Blunda.</h1>
+
+      <!-- ✏️ MODIFICA QUI: due o tre righe su di te -->
+      <p class="lead">
+ I am an AI researcher at INRIA.
+      </p>
+
+      <!-- ✏️ MODIFICA QUI: i tuoi link (sostituisci gli indirizzi) -->
+      <ul class="links">
+        <li><a class="primary" href="mailto:nome@esempio.it">Scrivimi</a></li>
+        <li><a href="https://github.com/tuo-username" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/tuo-profilo" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="cv.pdf">Curriculum (PDF)</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== PROGETTI ========== -->
+    <section id="Projects">
+      <div class="wrap">
+        <h2>Progetti</h2>
+        <div class="projects">
+
+          <!-- ✏️ MODIFICA QUI: copia e incolla questo blocco <article> per ogni progetto -->
+          <article class="project">
+            <h3><a href="https://github.com/tuo-username/progetto-uno" target="_blank" rel="noopener">Discrete Diffusion Models are Minimax Optimal Under Sparsity</a></h3>
+            <p>In this project we study the ability of this new class of generative models to approximate density, in the case in which the distribution is sparse.</p>
+            <ul class="tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+            </ul>
+          </article>
+    </section>
+
+    <!-- ========== COMPETENZE ========== -->
+    <section id="competenze">
+      <div class="wrap">
+        <h2>Competences</h2>
+        <div class="skills">
+
+          <!-- ✏️ MODIFICA QUI: raggruppa le competenze come preferisci -->
+          <div>
+            <h3>Programming languages</h3>
+            <ul>
+              <li>Python</li><li>Matlab</li><li>Julia</li><li>C</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Strumenti</h3>
+            <ul>
+              <li>Git</li><li>VS Code</li><li>Latex</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Languages</h3>
+            <ul>
+              <li>Italiano (madrelingua)</li><li>English (C1)</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ESPERIENZA ========== -->
+    <section id="esperienza">
+      <div class="wrap">
+        <h2>Esperienza</h2>
+        <ol class="timeline">
+
+          <!-- ✏️ MODIFICA QUI: un <li> per ogni esperienza o titolo di studio, dalla più recente -->
+          <li>
+            <time>2025 – present</time>
+            <div>
+              <h3>Research intern</h3>
+              <div class="org">INRIA</div>
+              <p>I am currently working on Discrete Diffusion Models.</p>
+            </div>
+          </li>
+
+          <li>
+            <time>2025</time>
+            <div>
+              <h3>Master degree in Mathematics</h3>
+              <div class="org">University of Pisa/ EPFL</div>
+            </div>
+          </li>
+
+          <li>
+            <time>2024</time>
+            <div>
+              <h3>Bachelor degree in Mathematics</h3>
+              <div class="org">Università di Pisa</div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== CONTATTI ========== -->
+    <section id="contatti" class="contact">
+      <div class="wrap">
+        <h2>Contacts</h2>
+        <!-- ✏️ MODIFICA QUI: email e altri recapiti -->
+        <p class="lead">
+          The easiest way to contact me is via email:
+          <a href="mailto:nome@esempio.it">luca.blunda@inria.fr</a>.
+        </p>
+        <p>I usually answer quickly.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <!-- ✏️ MODIFICA QUI: nome e anno -->
+      © 2026 Luca Blunda
+    </div>
+  </footer>
+
+</body>
+</html>
